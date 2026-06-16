@@ -194,6 +194,56 @@
       height: 58%;
     }
 
+    .open-name-wrap {
+      width: min(420px, 82vw);
+      display: grid;
+      gap: 10px;
+    }
+
+    .open-name-label {
+      font-size: clamp(14px, 2.5vw, 18px);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff4c8;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      text-align: left;
+    }
+
+    .open-name-input {
+      width: 100%;
+      min-height: 58px;
+      padding: 14px 22px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(255, 238, 174, 0.45);
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff4c8;
+      font-size: clamp(16px, 2.8vw, 22px);
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 500;
+      outline: none;
+      backdrop-filter: blur(6px);
+      transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .open-name-input::placeholder {
+      color: rgba(255, 244, 200, 0.52);
+    }
+
+    .open-name-input:focus {
+      border-color: rgba(255, 238, 174, 0.8);
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 0 4px rgba(255, 238, 174, 0.18);
+    }
+
+    .open-name-error {
+      display: none;
+      color: #ffcfcf;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: left;
+    }
+
     .open-button {
       min-height: 62px;
       min-width: min(420px, 82vw);
@@ -471,8 +521,8 @@
 
     .info-value {
       color: #20160e;
-      font-family: "Playfair Display", Georgia, serif;
-      font-size: clamp(22px, 3.1vw, 28px);
+      font-family: "Be Vietnam Pro", system-ui, sans-serif;
+      font-size: clamp(20px, 2.8vw, 25px);
       font-weight: 700;
       line-height: 1.25;
     }
@@ -958,29 +1008,29 @@
       }
 
       .info-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, 1fr);
         margin: 0 -18px 34px;
-        padding: 24px 10px;
+        padding: 20px 4px;
       }
 
       .info-item {
-        min-height: 150px;
-        padding: 14px 10px;
-        border-right: 0;
-        border-bottom: 1px solid rgba(200, 155, 47, 0.2);
-      }
-
-      .info-item:last-child {
+        min-height: auto;
+        padding: 8px 4px;
+        border-right: 1px solid rgba(200, 155, 47, 0.2);
         border-bottom: 0;
       }
 
+      .info-item:last-child {
+        border-right: 0;
+      }
+
       .info-icon {
-        height: 36px;
-        font-size: 29px;
+        height: 32px;
+        font-size: 24px;
       }
 
       .info-label {
-        font-size: 12px;
+        font-size: 11px;
       }
 
       .quote-card {
@@ -1221,39 +1271,39 @@
       }
 
       .info-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, 1fr);
         margin: 0 -16px 32px;
-        padding: 0 16px;
+        padding: 16px 4px;
       }
 
       .info-item {
         min-height: auto;
-        gap: 8px;
-        padding: 24px 0;
-        border-right: 0;
-        border-bottom: 1px solid rgba(200, 155, 47, 0.2);
-      }
-
-      .info-item:last-child {
+        gap: 6px;
+        padding: 8px 2px;
+        border-right: 1px solid rgba(200, 155, 47, 0.2);
         border-bottom: 0;
       }
 
+      .info-item:last-child {
+        border-right: 0;
+      }
+
       .info-icon {
-        height: 36px;
-        font-size: 28px;
+        height: 28px;
+        font-size: 20px;
       }
 
       .info-label {
-        font-size: 12px;
-        letter-spacing: 0.18em;
+        font-size: 10px;
+        letter-spacing: 0.08em;
       }
 
       .info-value {
-        font-size: 24px;
+        font-size: 14px;
       }
 
       .info-sub {
-        font-size: 15px;
+        font-size: 11px;
       }
 
       .quote-card {
@@ -1461,7 +1511,20 @@
         </div>
       </div>
 
-      <button class="open-button" id="open-invite-btn" type="button">Chạm để mở thiệp</button>
+      <div class="open-name-wrap">
+        <label class="open-name-label" for="visitor-name">✦ Nhập tên của bạn để mở thiệp ✦</label>
+        <input
+          class="open-name-input"
+          id="visitor-name"
+          type="text"
+          autocomplete="name"
+          placeholder="Họ và tên của bạn..."
+          maxlength="80"
+        >
+        <span class="open-name-error" id="open-name-error">Bạn chưa nhập tên, điền vào rồi mở thiệp nhé 💌</span>
+      </div>
+
+      <button class="open-button" id="open-invite-btn" type="button">Mở thiệp của tôi ✉</button>
     </div>
   </section>
 
@@ -1483,7 +1546,7 @@
         <section class="invite-content">
           <div class="label">Thiệp mời</div>
           <p class="invite-text">Trân trọng kính mời</p>
-          <h1 class="person">Hoàng Đức Tú Anh 🎓</h1>
+          <h1 class="person" id="invited-person-name">🎓</h1>
           <div class="divider">✦</div>
           <div class="degree">Lễ tốt nghiệp đại học</div>
           <p class="school">
@@ -1701,6 +1764,21 @@
     }
 
     function openInvite() {
+      const visitorNameInput = document.getElementById("visitor-name");
+      const nameError = document.getElementById("open-name-error");
+      const visitorName = visitorNameInput.value.trim();
+
+      if (!visitorName) {
+        nameError.style.display = "block";
+        visitorNameInput.focus();
+        return;
+      }
+      nameError.style.display = "none";
+
+      // Cập nhật tên trong thiệp
+      const personEl = document.getElementById("invited-person-name");
+      personEl.textContent = visitorName + " 🎓";
+
       openEnvelope.classList.add("opening");
       openInviteBtn.disabled = true;
       playMusic();
@@ -1756,6 +1834,9 @@
     }
 
     openInviteBtn.addEventListener("click", openInvite);
+    document.getElementById("visitor-name").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") openInvite();
+    });
     nextBtn.addEventListener("click", () => showView("rsvp"));
     backBtn.addEventListener("click", () => showView("invite"));
     doneBackBtn.addEventListener("click", () => showView("invite"));
